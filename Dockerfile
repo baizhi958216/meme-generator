@@ -32,6 +32,10 @@ COPY --from=tmp /tmp/requirements.txt /app/requirements.txt
 
 COPY ./resources/fonts/* /usr/share/fonts/meme-fonts/
 
+RUN echo "deb http://mirrors.aliyun.com/debian/ bookworm main" >> /etc/apt/sources.list
+
+RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+
 RUN apt-get update \
   && apt-get install -y --no-install-recommends fontconfig fonts-noto-color-emoji libgl1-mesa-glx libgl1-mesa-dri gettext \
   && fc-cache -fv \
